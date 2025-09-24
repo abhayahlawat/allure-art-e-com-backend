@@ -140,5 +140,3 @@ export async function webhook(req: Request, res: Response) {
   // For simplicity, rely on client verification flow above.
   res.json({ ok: true });
 }
-
-

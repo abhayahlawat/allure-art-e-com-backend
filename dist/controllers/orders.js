@@ -24,7 +24,8 @@ export async function createOrder(req, res) {
     // @ts-ignore
     const authed = req.user;
     const { items, currency, email, userId } = parsed.data;
-    const amountInPaise = Math.round(items.reduce((sum, i) => sum + i.price * i.quantity, 0) * 83 * 100);
+    // Calculate total in paise (1 INR = 100 paise)
+    const amountInPaise = Math.round(items.reduce((sum, i) => sum + i.price * i.quantity, 0) * 100);
     if (amountInPaise <= 0) {
         return res.status(400).json({ error: 'Amount must be greater than zero' });
     }
@@ -56,7 +57,7 @@ export async function createOrder(req, res) {
             title: i.title,
             artist: i.artist,
             image: i.image ?? null,
-            unit_price_inr: Math.round(i.price * 83 * 100),
+            unit_price_inr: i.price * 100, // Store price in paise (1 INR = 100 paise)
             quantity: i.quantity
         }));
         const { error: itemsError } = await supabase.from('order_items').insert(orderItems);
