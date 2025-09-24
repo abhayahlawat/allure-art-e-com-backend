@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase.js';
 
 // Schema for address validation
 const AddressSchema = z.object({

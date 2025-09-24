@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase.js';
 // Schema for address validation
 const AddressSchema = z.object({
     full_name: z.string().min(1, 'Full name is required'),
